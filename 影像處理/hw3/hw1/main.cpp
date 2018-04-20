@@ -11,7 +11,7 @@ using namespace std;
 void imageShow(Mat &imgS, string name);	// 你可以利用下列程式碼在自己電腦顯示圖像看結果
 string getFileName(int argc, char *argv[]);	// 把目錄去掉得到圖像檔案名稱
 void outputFile(Mat &imgD, string &filename);	// 加上目錄 \output 寫出檔案
-Mat show_histogram(Mat& img); // 繪製直方圖
+Mat draw_histogram(Mat& img); // 繪製直方圖
 Mat covertToGray(Mat imgS); // 轉成灰階
 Mat  histogram_equalization(Mat imgS); // 直方圖均化
 int main(int argc, char *argv[])
@@ -21,9 +21,9 @@ int main(int argc, char *argv[])
 	srcImg = imread(argv[1], CV_LOAD_IMAGE_COLOR); //讀取圖像
 
 	grayImg = covertToGray(srcImg);
-	grayHis = show_histogram(grayImg);
+	grayHis = draw_histogram(grayImg);
 	equImg = histogram_equalization(grayImg);
-	equHis = show_histogram(equImg);
+	equHis = draw_histogram(equImg);
 
 	imageShow(grayImg, "Gray Image");
 	imageShow(grayHis, "Gray histogram");
@@ -58,7 +58,7 @@ void outputFile(Mat &imgD, string &filename)
 
 }
 
-Mat show_histogram(Mat& img)
+Mat draw_histogram(Mat& img)
 {
 	// 繪製直方圖
 
