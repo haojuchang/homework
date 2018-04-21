@@ -19,7 +19,7 @@ Mat rotate(Mat src, double angle)
 			for (int i = 0; i < 3; i++)
 				dst.at<Vec3b>(x, y)[i] = 0;
 
-	Point2f center(src.cols / 2., src.rows / 2.);
+	Point center(src.rows / 2., src.cols / 2.);
 
 	for (int x = 0; x < src.rows; x++)
 	{
@@ -52,21 +52,12 @@ int main(int argc, char *argv[])
 	double angle = stoi(argv[2]);
 	imgD = rotate(imgS, angle * M_PI /180);
 
-	// 把目錄去掉得到圖像檔案名稱
-	string filename = argv[1];
-	size_t last_slash_idx = filename.find_last_of("\\/");
-	filename.erase(0, last_slash_idx);
-
-	// 加上目錄 \output 寫出檔案
-	string pathOfile = ".\\output\\" + filename;
-	imwrite(pathOfile, imgD);
-
 	// 你可以利用下列程式碼在自己電腦顯示圖像看結果
 
-	/*namedWindow("Source image", CV_WINDOW_AUTOSIZE);
+	namedWindow("Source image", CV_WINDOW_AUTOSIZE);
 	imshow("Source image", imgS);
 	namedWindow("Output image", CV_WINDOW_AUTOSIZE);
-	imshow("Output image", imgD);*/
+	imshow("Output image", imgD);
 
 	waitKey(0);
 
