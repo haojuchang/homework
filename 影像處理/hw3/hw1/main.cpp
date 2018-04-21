@@ -14,6 +14,7 @@ void outputFile(Mat &imgD, string &filename);	// 加上目錄 \output 寫出檔案
 Mat draw_histogram(Mat& img); // 繪製直方圖
 Mat covertToGray(Mat imgS); // 轉成灰階
 Mat  histogram_equalization(Mat imgS); // 直方圖均化
+
 int main(int argc, char *argv[])
 {
 
@@ -54,9 +55,9 @@ string getFileName(int argc, char *argv[])
 void outputFile(Mat &imgD, string &filename)
 {
 	// 加上目錄 \output 寫出檔案
+
 	string pathOfile = ".\\output\\" + filename;
 	imwrite(pathOfile, imgD);
-
 }
 
 Mat draw_histogram(Mat& img)
