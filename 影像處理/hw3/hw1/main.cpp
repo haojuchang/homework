@@ -41,7 +41,8 @@ void imageShow(Mat &imgS, string name)
 	imshow(name, imgS);
 }
 
-string getFileName(int argc, char *argv[]) {
+string getFileName(int argc, char *argv[]) 
+{
 	// 把目錄去掉得到圖像檔案名稱
 
 	string filename = argv[1];
@@ -86,13 +87,9 @@ Mat draw_histogram(Mat& img)
 Mat covertToGray(Mat imgS)
 {
 	// 轉成灰階
-	Mat imgD;
-	IplImage *image, *grayImage;
-	image = new IplImage(imgS); // Mat to IplImage
-	grayImage = cvCreateImage(cvGetSize(image), IPL_DEPTH_8U, 1);//1代表灰階圖
-	cvCvtColor(image, grayImage, CV_RGB2GRAY);//RGB to Gray
-	imgD = cvarrToMat(grayImage); // IplImage to Mat
 
+	Mat imgD;
+	cvtColor(imgS, imgD, CV_BGR2GRAY);//RGB to Gray
 	return imgD;
 }
 
@@ -100,7 +97,8 @@ Mat  histogram_equalization(Mat imgS)
 {
 	// 直方圖均化
 
-	Mat imgD(imgS);
+	Mat imgD;
+	imgS.copyTo(imgD);
 	size_t dot = imgS.rows * imgS.cols; // 有幾個像素
 	int *temp = new int[256]; // 256 個色階
 	double *new_level = new double[256]; // 256 個新色階
@@ -117,7 +115,7 @@ Mat  histogram_equalization(Mat imgS)
 	{
 		for(int y = 0; y < imgS.cols; y++)
 		{
-			temp[int(imgS.at<uchar>(x, y))] ++;
+			temp[int(imgD.at<uchar>(x, y))] ++;
 		}
 	}
 
@@ -137,7 +135,7 @@ Mat  histogram_equalization(Mat imgS)
 	{
 		for (int y = 0; y < imgS.cols; y++)
 		{
-			imgS.at<uchar>(x, y) = uchar(temp[int(imgS.at<uchar>(x, y))]);
+			imgD.at<uchar>(x, y) = uchar(temp[int(imgD.at<uchar>(x, y))]);
 		}
 	}
 
