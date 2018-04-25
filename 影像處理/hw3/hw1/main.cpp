@@ -67,7 +67,7 @@ Mat draw_histogram(Mat& img)
 	int channels = 0;
 	MatND dstHist;
 	int histSize[] = { 256 };     
-	float midRanges[] = { 0, 256 };
+	float midRanges[] = { 0, 255 };
 	const float *ranges[] = { midRanges };
 
 	calcHist(&img, 1, &channels, Mat(), dstHist, 1, histSize, ranges, true, false);
